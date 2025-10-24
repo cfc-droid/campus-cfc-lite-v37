@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen — Módulo 1 — Introducción a la Psicología del Trader</title>
+  <link rel="stylesheet" href="/frontend/css/premium.css">
+  <link rel="stylesheet" href="/frontend/css/exam-extra.css">
+  <script src="/frontend/js/motivation.js" defer></script>
+</head>
+
+<body>
+  <main class="contenido">
+    <h1>Examen — Módulo 1: Introducción a la Psicología del Trader</h1>
+    <p><em>Reflexioná antes de responder. Este examen no mide memoria, sino conciencia emocional, disciplina y claridad mental frente al mercado.</em></p>
+
+    <form id="exam1">
+
+      <!-- Pregunta 1 (Capítulo 1) -->
+      <fieldset>
+        <legend>1) Según los pilares definidos en el Capítulo 1, ¿qué componente convierte las emociones en información operativa para ajustar decisiones sin reprimirlas?</legend>
+        <!-- Correcta: A -->
+        <label><input name="q1" type="radio" value="A"> A) Regulación emocional — usar miedo/euforia como señales para calibrar exposición y proceso.</label><br>
+        <label><input name="q1" type="radio" value="B"> B) Disciplina inteligente — seguir reglas con rigidez absoluta pase lo que pase.</label><br>
+        <label><input name="q1" type="radio" value="C"> C) Pensamiento probabilístico — buscar certezas antes de ejecutar.</label><br>
+        <label><input name="q1" type="radio" value="D"> D) Autoconciencia — ignorar los “triggers” para no sesgar el análisis.</label>
+      </fieldset>
+
+      <!-- Pregunta 2 (Capítulo 2) -->
+      <fieldset>
+        <legend>2) ¿Cuál de las siguientes conductas describe con precisión el “profit snatching” y su efecto en la expectativa de la estrategia?</legend>
+        <!-- Correcta: C -->
+        <label><input name="q2" type="radio" value="A"> A) Aumentar el tamaño tras una racha ganadora para acelerar el crecimiento del equity.</label><br>
+        <label><input name="q2" type="radio" value="B"> B) Evitar operar ante volatilidad y perder oportunidades A+.</label><br>
+        <label><input name="q2" type="radio" value="C"> C) Cerrar ganadoras prematuramente por miedo a la reversión, reduciendo el promedio de ganancias y llevando una estrategia rentable a casi “break-even”.</label><br>
+        <label><input name="q2" type="radio" value="D"> D) Mantener pérdidas hasta que “vuelvan” para no materializar el drawdown.</label>
+      </fieldset>
+
+      <!-- Pregunta 3 (Capítulo 3) -->
+      <fieldset>
+        <legend>3) Desde la economía conductual, ¿qué hallazgo de la Prospect Theory explica que un trader suela cortar ganancias pronto y sostener pérdidas demasiado tiempo?</legend>
+        <!-- Correcta: D -->
+        <label><input name="q3" type="radio" value="A"> A) Efecto de marco: cambiar el color del gráfico altera el sesgo direccional.</label><br>
+        <label><input name="q3" type="radio" value="B"> B) Contabilidad mental: separar en “dinero del día” y “capital base”.</label><br>
+        <label><input name="q3" type="radio" value="C"> C) Sobreponderación de probabilidades altas y subestimación de bajas.</label><br>
+        <label><input name="q3" type="radio" value="D"> D) Aversión a la pérdida: las pérdidas duelen mucho más que una ganancia equivalente, sesgando la gestión de salidas.</label>
+      </fieldset>
+
+      <!-- Pregunta 4 (Capítulo 4) -->
+      <fieldset>
+        <legend>4) ¿Cuál de las siguientes afirmaciones corrige el mito “la disciplina es solo fuerza de voluntad”?</legend>
+        <!-- Correcta: B -->
+        <label><input name="q4" type="radio" value="A"> A) La disciplina depende de motivación intrínseca alta y constante.</label><br>
+        <label><input name="q4" type="radio" value="B"> B) La disciplina sostenible se construye con sistemas (checklists, límites, automatizaciones y diseño ambiental), no solo con voluntad.</label><br>
+        <label><input name="q4" type="radio" value="C"> C) Eliminar todos los sesgos cognitivos es condición para la disciplina.</label><br>
+        <label><input name="q4" type="radio" value="D"> D) Operar más horas fortalece la disciplina por exposición repetida al estrés.</label>
+      </fieldset>
+
+      <!-- 🔽 Botón funcional -->
+      <button type="button" onclick="enviarExamen()">Enviar respuestas</button>
+
+    </form>
+  </main>
+
+  <footer class="firma-cfc">
+    <p>© Campus CFC Trading LITE V37 — Cristian F. Choqui</p>
+  </footer>
+
+  <script>
+function enviarExamen() {
+  const preguntas = document.querySelectorAll('fieldset'); // 👈 cambio clave
+  let correctas = 0;
+
+  preguntas.forEach((pregunta) => {
+    const seleccionada = pregunta.querySelector('input[type="radio"]:checked');
+    if (seleccionada) {
+      const comentario = pregunta.innerHTML.match(/<!-- Correcta:\s*([A-D]) -->/);
+      if (comentario && seleccionada.value === comentario[1]) {
+        correctas++;
+      }
+    }
+  });
+
+  const total = preguntas.length;
+  const porcentaje = (correctas / total) * 100;
+  let mensaje = "";
+
+  if (porcentaje >= 75) {
+    mensaje = `🎯 ¡Aprobado! Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  } else {
+    mensaje = `❌ No aprobado. Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  }
+
+  alert(mensaje);
+}
+  </script>
+
+  <!-- Script del botón volver -->
+  <script src="../../js/backButton.js"></script>
+</body>
+</html>

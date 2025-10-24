@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen — Módulo 2 — Neurociencia del Trading</title>
+  <link rel="stylesheet" href="/frontend/css/premium.css">
+  <link rel="stylesheet" href="/frontend/css/exam-extra.css">
+  <script src="/frontend/js/motivation.js" defer></script>
+</head>
+
+<body>
+  <main class="contenido">
+    <h1>Examen — Módulo 2: Neurociencia del Trading</h1>
+    <p><em>Reflexioná antes de responder. Este examen no mide memoria, sino tu comprensión de los mecanismos cerebrales que influyen en la toma de decisiones del trader.</em></p>
+
+    <form id="exam2">
+
+      <!-- Pregunta 1 -->
+      <fieldset>
+        <legend>1) Según el Capítulo 1, ¿cuál es el verdadero objetivo de la Psicología del Trader?</legend>
+        <!-- Correcta: C -->
+        <label><input name="q1" type="radio" value="A"> A) Aprender a evitar cualquier tipo de pérdida durante la operativa.</label><br>
+        <label><input name="q1" type="radio" value="B"> B) Controlar las emociones para operar sin sentir miedo ni ansiedad.</label><br>
+        <label><input name="q1" type="radio" value="C"> C) Desarrollar una mentalidad consciente y disciplinada que permita interpretar el mercado sin reacciones impulsivas.</label><br>
+        <label><input name="q1" type="radio" value="D"> D) Buscar motivación externa constante para mantener el enfoque en las ganancias.</label>
+      </fieldset>
+
+      <!-- Pregunta 2 -->
+      <fieldset>
+        <legend>2) En el Capítulo 2 se menciona que la dopamina, serotonina y cortisol influyen directamente en el trader. ¿Cuál es la combinación más equilibrada para un desempeño estable?</legend>
+        <!-- Correcta: B -->
+        <label><input name="q2" type="radio" value="A"> A) Alta dopamina y bajo cortisol, ignorando los niveles de serotonina.</label><br>
+        <label><input name="q2" type="radio" value="B"> B) Dopamina moderada, serotonina estable y cortisol controlado mediante pausas y respiración.</label><br>
+        <label><input name="q2" type="radio" value="C"> C) Dopamina alta y serotonina baja para mantener el impulso de riesgo.</label><br>
+        <label><input name="q2" type="radio" value="D"> D) Cortisol elevado para reaccionar más rápido ante movimientos de mercado.</label>
+      </fieldset>
+
+      <!-- Pregunta 3 -->
+      <fieldset>
+        <legend>3) De acuerdo al Capítulo 3, ¿qué representa la neuroplasticidad en el contexto del trading?</legend>
+        <!-- Correcta: D -->
+        <label><input name="q3" type="radio" value="A"> A) La capacidad del cerebro para eliminar las emociones negativas de forma permanente.</label><br>
+        <label><input name="q3" type="radio" value="B"> B) El uso de la fuerza de voluntad para evitar errores en las operaciones.</label><br>
+        <label><input name="q3" type="radio" value="C"> C) Un rasgo innato que solo poseen los traders más experimentados.</label><br>
+        <label><input name="q3" type="radio" value="D"> D) La habilidad del cerebro para reconfigurarse mediante la práctica consciente y reemplazar patrones emocionales limitantes.</label>
+      </fieldset>
+
+      <!-- Pregunta 4 -->
+      <fieldset>
+        <legend>4) En el Capítulo 4 se explica el papel del neurofeedback y el biohacking. ¿Cuál es su principal beneficio para el trader?</legend>
+        <!-- Correcta: A -->
+        <label><input name="q4" type="radio" value="A"> A) Entrenar el cerebro y el cuerpo para mantener coherencia fisiológica y emocional durante la operativa.</label><br>
+        <label><input name="q4" type="radio" value="B"> B) Aumentar la velocidad de reacción ante cualquier cambio del mercado sin descanso.</label><br>
+        <label><input name="q4" type="radio" value="C"> C) Sustituir el análisis técnico por medición biológica en tiempo real.</label><br>
+        <label><input name="q4" type="radio" value="D"> D) Depender de tecnología externa para controlar las emociones.</label>
+      </fieldset>
+
+      <!-- 🔽 Botón funcional -->
+      <button type="button" onclick="enviarExamen()">Enviar respuestas</button>
+
+    </form>
+  </main>
+
+  <footer class="firma-cfc">
+    <p>© Campus CFC Trading LITE V37 — Cristian F. Choqui</p>
+  </footer>
+
+  <script>
+function enviarExamen() {
+  const preguntas = document.querySelectorAll('fieldset');
+  let correctas = 0;
+
+  preguntas.forEach((pregunta) => {
+    const seleccionada = pregunta.querySelector('input[type="radio"]:checked');
+    if (seleccionada) {
+      const comentario = pregunta.innerHTML.match(/<!-- Correcta:\s*([A-D]) -->/);
+      if (comentario && seleccionada.value === comentario[1]) {
+        correctas++;
+      }
+    }
+  });
+
+  const total = preguntas.length;
+  const porcentaje = (correctas / total) * 100;
+  let mensaje = "";
+
+  if (porcentaje >= 75) {
+    mensaje = `🎯 ¡Aprobado! Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  } else {
+    mensaje = `❌ No aprobado. Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  }
+
+  alert(mensaje);
+}
+  </script>
+
+  <!-- Script del botón volver -->
+  <script src="../../js/backButton.js"></script>
+</body>
+</html>
