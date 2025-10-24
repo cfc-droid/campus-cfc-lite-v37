@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="css/premium.min.css" />
   <link rel="stylesheet" href="css/exam-extra.css" />
 
+  <!-- ✅ CFC_FUNC_15_SUBPASO_1.3 — Preload de imágenes críticas -->
+  <script src="js/preload.js" defer></script>
+
   <style>
     body {
       background: #0b0b0b;
@@ -123,6 +126,14 @@
 </head>
 
 <body>
+
+  <!-- ✅ CFC_FUNC_15_SUBPASO_1.3 — Loader HTML + fadeOut (24-10-2025) -->
+  <div id="loader">
+    <img src="img/logo.png" alt="Campus CFC Logo">
+    <p id="quote"></p>
+    <button id="enterBtn">Entrar al Campus</button>
+  </div>
+
   <main class="card">
     <span class="pill">Versión LITE con progreso, exámenes y sonidos 🎧</span>
     <h1>Campus CFC LITE</h1>
@@ -159,7 +170,6 @@
     });
   </script>
 
-  <!-- Test sincronización automática FINAL ✅ -->
-
+  <script src="js/loader.js" defer></script>
 </body>
 </html>
