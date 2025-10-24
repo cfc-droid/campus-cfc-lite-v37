@@ -1,0 +1,82 @@
+# 🚀 Deploy automático a Cloudflare Pages (Campus CFC LITE V37 FINAL)
+# Optimizado para: GitHub Actions v3 + Wrangler v4 + flujo estático (/frontend)
+
+name: 🚀 Deploy automático a Cloudflare Pages (Campus CFC LITE V37 FINAL)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: 🧱 Build & Deploy
+    runs-on: ubuntu-latest
+
+    env:
+      NPM_CONFIG_UPDATE_NOTIFIER: false
+      NODE_OPTIONS: "--max_old_space_size=4096"
+
+    steps:
+      # 🌀 Clonar repositorio
+      - name: 🌀 Clonar el repositorio
+        uses: actions/checkout@v4
+
+      # 📦 Instalar dependencias (solo si existe package.json)
+      - name: 📦 Instalar dependencias
+        run: |
+          if [ -f package.json ]; then
+            echo "📦 package.json detectado. Instalando dependencias..."
+            npm ci || npm install
+          else
+            echo "⚠️ No hay package.json – omitiendo instalación."
+          fi
+
+      # 🧩 Verificar estructura del proyecto
+      - name: 🧩 Verificar estructura del proyecto
+        run: |
+          echo "🔎 Contenido del proyecto:"
+          ls -la
+          echo "🔍 Verificando carpeta /frontend ..."
+          if [ -d frontend ]; then
+            echo "✅ Carpeta /frontend detectada correctamente."
+          else
+            echo "❌ ERROR: No se encontró la carpeta /frontend."
+            exit 1
+          fi
+
+      # 🏗️ Ejecutar build (solo si hay script)
+      - name: 🏗️ Crear build (si existe script)
+        run: |
+          if [ -f package.json ]; then
+            if grep -q "\"build\":" package.json; then
+              echo "⚙️ Ejecutando npm run build ..."
+              npm run build
+            else
+              echo "⚠️ No hay script de build – omitiendo paso."
+            fi
+          else
+            echo "📁 Proyecto estático – sin build necesario."
+          fi
+
+      # 🌐 Deploy a Cloudflare Pages
+      - name: 🌐 Deploy a Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: campus-cfc-lite-v36
+          directory: frontend
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          NPM_CONFIG_UPDATE_NOTIFIER: false
+
+      # 🧹 Limpieza de cache (opcional, desactivado si no hay Zone ID)
+      - name: 🧹 Limpiar caché de Cloudflare
+        if: ${{ env.CLOUDFLARE_ZONE_ID == '' }}
+        run: echo "⚙️ Limpieza de caché desactivada (no se detectó Zone ID)."
+
+      # ✅ Confirmar despliegue exitoso
+      - name: ✅ Confirmar despliegue exitoso
+        run: echo "🎉 Campus CFC LITE V37 FINAL desplegado correctamente en Cloudflare Pages."
