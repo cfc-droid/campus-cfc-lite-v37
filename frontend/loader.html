@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus CFC Trading LITE - Loader</title>
+
+  <!-- CSS PRINCIPAL -->
+  <link rel="stylesheet" href="/frontend/css/loader.css" />
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Poppins, sans-serif;
+      background: #0b0b0b;
+      color: #eee;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    svg {
+      width: 160px;
+      height: 160px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      opacity: 0.7;
+      margin-bottom: 30px;
+    }
+
+    /* Botones principales */
+    .btn-main,
+    .btn-demo {
+      padding: 12px 22px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+      margin: 6px 0;
+    }
+
+    .btn-main {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
+    }
+
+    .btn-demo {
+      background: linear-gradient(90deg, gold, orange);
+      color: #111;
+    }
+
+    .btn-main:hover,
+    .btn-demo:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 12px;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loader">
+    <!-- Logo animado CFC -->
+    <svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="48" stroke="#dadf37" stroke-width="2" fill="none" />
+      <text x="50%" y="54%" text-anchor="middle" fill="#dadf37" font-size="22" font-family="Poppins, sans-serif">
+        CFC
+      </text>
+    </svg>
+
+    <p>Cargando Campus...</p>
+
+    <!-- 🔹 Botones principales -->
+    <button class="btn-main" onclick="window.location.href='/frontend/modules/index.html'">
+      Entrar al Campus
+    </button>
+
+    <!-- 🔸 Nuevo botón Demo Pública -->
+    <button id="btnDemoPublica" class="btn-demo">Ver demo pública</button>
+  </div>
+
+  <footer>© 2025 Campus CFC Trading — V37 FINAL</footer>
+
+  <!-- Scripts -->
+  <script src="/frontend/js/loader.js" defer></script>
+  <script src="/frontend/scripts/showroom.js"></script>
+</body>
+</html>
