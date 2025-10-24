@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen — Módulo 11 — Ecosistema de Apoyo y Herramientas</title>
+  <link rel="stylesheet" href="/frontend/css/premium.css">
+  <link rel="stylesheet" href="/frontend/css/exam-extra.css">
+  <script src="/frontend/js/motivation.js" defer></script>
+</head>
+
+<body>
+  <main class="contenido">
+    <h1>Examen — Módulo 11: Ecosistema de Apoyo y Herramientas</h1>
+    <p><em>Reflexioná antes de responder. Este examen evalúa tu comprensión sobre cómo construir un entorno de apoyo psicológico, técnico y emocional que potencie la consistencia del trader consciente.</em></p>
+
+    <form id="exam11">
+
+      <!-- Pregunta 1 -->
+      <fieldset>
+        <legend>1) Según el Capítulo 1, ¿cuál es la función principal del ecosistema de apoyo en la psicología del trader?</legend>
+        <!-- Correcta: C -->
+        <label><input name="q1" type="radio" value="A"> A) Sustituir la disciplina individual por motivación externa.</label><br>
+        <label><input name="q1" type="radio" value="B"> B) Ofrecer un entorno de dependencia emocional controlada.</label><br>
+        <label><input name="q1" type="radio" value="C"> C) Crear un entorno equilibrado que refuerce la claridad mental, emocional y técnica.</label><br>
+        <label><input name="q1" type="radio" value="D"> D) Evitar cualquier interacción con otros traders para mantener autonomía absoluta.</label>
+      </fieldset>
+
+      <!-- Pregunta 2 -->
+      <fieldset>
+        <legend>2) En el Capítulo 2, ¿qué distingue a un uso inteligente de las herramientas tecnológicas dentro del ecosistema del trader?</legend>
+        <!-- Correcta: B -->
+        <label><input name="q2" type="radio" value="A"> A) Utilizar la mayor cantidad posible de aplicaciones simultáneamente.</label><br>
+        <label><input name="q2" type="radio" value="B"> B) Escoger herramientas que aumenten la concentración y reduzcan el ruido operativo.</label><br>
+        <label><input name="q2" type="radio" value="C"> C) Incorporar tecnología para depender menos del criterio propio.</label><br>
+        <label><input name="q2" type="radio" value="D"> D) Delegar las decisiones psicológicas a sistemas automatizados.</label>
+      </fieldset>
+
+      <!-- Pregunta 3 -->
+      <fieldset>
+        <legend>3) Según el Capítulo 3, ¿cuál es el propósito central de la comunidad consciente del trader?</legend>
+        <!-- Correcta: B -->
+        <label><input name="q3" type="radio" value="A"> A) Comparar resultados financieros y establecer jerarquías internas.</label><br>
+        <label><input name="q3" type="radio" value="B"> B) Crear un espacio de automejora colectiva basado en cooperación, feedback y coherencia emocional.</label><br>
+        <label><input name="q3" type="radio" value="C"> C) Reunir traders para compartir señales de entrada y salida en tiempo real.</label><br>
+        <label><input name="q3" type="radio" value="D"> D) Fomentar la competencia constante para estimular la disciplina.</label>
+      </fieldset>
+
+      <!-- Pregunta 4 -->
+      <fieldset>
+        <legend>4) De acuerdo con el Capítulo 4, ¿qué representa el “Ciclo de Ajuste Mensual CFC” dentro del mantenimiento del ecosistema personal?</legend>
+        <!-- Correcta: C -->
+        <label><input name="q4" type="radio" value="A"> A) Un método de revisión reactiva que se aplica solo tras fallos emocionales.</label><br>
+        <label><input name="q4" type="radio" value="B"> B) Un proceso administrativo para registrar operaciones financieras.</label><br>
+        <label><input name="q4" type="radio" value="C"> C) Un protocolo de revisión periódica que permite reflexionar, depurar, optimizar y proyectar mejoras.</label><br>
+        <label><input name="q4" type="radio" value="D"> D) Una técnica de control para evitar cambios en las rutinas establecidas.</label>
+      </fieldset>
+
+      <!-- 🔽 Botón funcional -->
+      <button type="button" onclick="enviarExamen()">Enviar respuestas</button>
+    </form>
+  </main>
+
+  <footer class="firma-cfc">
+    <p>© Campus CFC Trading LITE V37 — Cristian F. Choqui</p>
+  </footer>
+
+  <script>
+function enviarExamen() {
+  const preguntas = document.querySelectorAll('fieldset');
+  let correctas = 0;
+
+  preguntas.forEach((pregunta) => {
+    const seleccionada = pregunta.querySelector('input[type="radio"]:checked');
+    if (seleccionada) {
+      const comentario = pregunta.innerHTML.match(/<!-- Correcta:\s*([A-D]) -->/);
+      if (comentario && seleccionada.value === comentario[1]) {
+        correctas++;
+      }
+    }
+  });
+
+  const total = preguntas.length;
+  const porcentaje = (correctas / total) * 100;
+  let mensaje = "";
+
+  if (porcentaje >= 75) {
+    mensaje = `🎯 ¡Aprobado! Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  } else {
+    mensaje = `❌ No aprobado. Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  }
+
+  alert(mensaje);
+}
+  </script>
+
+  <!-- Script del botón volver -->
+  <script src="../../js/backButton.js"></script>
+</body>
+</html>

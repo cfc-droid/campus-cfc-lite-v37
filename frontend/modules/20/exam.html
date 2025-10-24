@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen — Módulo 20 — Legado Final del Trader Consciente</title>
+  <link rel="stylesheet" href="/frontend/css/premium.css">
+  <link rel="stylesheet" href="/frontend/css/exam-extra.css">
+  <script src="/frontend/js/motivation.js" defer></script>
+</head>
+
+<body>
+  <main class="contenido">
+    <h1>Examen — Módulo 20: Legado Final del Trader Consciente</h1>
+    <p><em>Reflexioná antes de responder. Este examen evalúa tu grado de integración entre propósito, servicio y coherencia interior, pilares del legado del trader consciente.</em></p>
+
+    <form id="exam20">
+
+      <!-- Pregunta 1 -->
+      <fieldset>
+        <legend>1) Según el Capítulo 1, ¿cuál es la verdadera medida del legado de un trader consciente?</legend>
+        <!-- Correcta: C -->
+        <label><input name="q1" type="radio" value="A"> A) La cantidad de operaciones ganadoras y la rentabilidad acumulada.</label><br>
+        <label><input name="q1" type="radio" value="B"> B) La capacidad para identificar oportunidades técnicas con precisión milimétrica.</label><br>
+        <label><input name="q1" type="radio" value="C"> C) La serenidad interior, la coherencia entre mente y acción, y la capacidad de servir con propósito.</label><br>
+        <label><input name="q1" type="radio" value="D"> D) La habilidad para operar sin emociones y mantener el control absoluto del mercado.</label>
+      </fieldset>
+
+      <!-- Pregunta 2 -->
+      <fieldset>
+        <legend>2) En el Capítulo 2, ¿qué representa el “silencio interior” en la práctica del trader consciente?</legend>
+        <!-- Correcta: B -->
+        <label><input name="q2" type="radio" value="A"> A) Un estado en el que el trader ignora completamente sus emociones para mantener la objetividad.</label><br>
+        <label><input name="q2" type="radio" value="B"> B) Un estado de atención plena en el que el trader observa sin reaccionar y actúa desde la presencia consciente.</label><br>
+        <label><input name="q2" type="radio" value="C"> C) El momento exacto en que se logra eliminar todo pensamiento negativo antes de operar.</label><br>
+        <label><input name="q2" type="radio" value="D"> D) Una técnica de relajación que se aplica solo después de finalizar la jornada operativa.</label>
+      </fieldset>
+
+      <!-- Pregunta 3 -->
+      <fieldset>
+        <legend>3) En el Capítulo 3 se menciona que “servir” es el nivel más alto del camino del trader consciente. ¿Qué significa esto en la práctica?</legend>
+        <!-- Correcta: D -->
+        <label><input name="q3" type="radio" value="A"> A) Enseñar a otros traders solo cuando se alcanzan resultados consistentemente rentables.</label><br>
+        <label><input name="q3" type="radio" value="B"> B) Compartir señales de entrada y salida con la comunidad para ganar prestigio.</label><br>
+        <label><input name="q3" type="radio" value="C"> C) Corregir los errores de los demás para ayudarlos a mejorar sus resultados.</label><br>
+        <label><input name="q3" type="radio" value="D"> D) Inspirar y guiar con el ejemplo, compartiendo desde la humildad y la coherencia sin buscar validación externa.</label>
+      </fieldset>
+
+      <!-- Pregunta 4 -->
+      <fieldset>
+        <legend>4) Según el Capítulo 4, ¿qué significa “vivir lo aprendido” para el trader consciente?</legend>
+        <!-- Correcta: A -->
+        <label><input name="q4" type="radio" value="A"> A) Integrar los principios del Campus en la vida cotidiana, aplicando la disciplina, la gratitud y la coherencia más allá del mercado.</label><br>
+        <label><input name="q4" type="radio" value="B"> B) Memorizar todas las estrategias aprendidas y repetirlas en cada sesión sin cambios.</label><br>
+        <label><input name="q4" type="radio" value="C"> C) Operar más horas al día para reafirmar el compromiso con el proceso de aprendizaje.</label><br>
+        <label><input name="q4" type="radio" value="D"> D) Dejar de operar y dedicarse únicamente a reflexionar sobre los capítulos del Campus.</label>
+      </fieldset>
+
+      <!-- 🔽 Botón funcional -->
+      <button type="button" onclick="enviarExamen()">Enviar respuestas</button>
+    </form>
+  </main>
+
+  <footer class="firma-cfc">
+    <p>© Campus CFC Trading LITE V37 — Cristian F. Choqui</p>
+  </footer>
+
+  <script>
+function enviarExamen() {
+  const preguntas = document.querySelectorAll('fieldset');
+  let correctas = 0;
+
+  preguntas.forEach((pregunta) => {
+    const seleccionada = pregunta.querySelector('input[type="radio"]:checked');
+    if (seleccionada) {
+      const comentario = pregunta.innerHTML.match(/<!-- Correcta:\s*([A-D]) -->/);
+      if (comentario && seleccionada.value === comentario[1]) {
+        correctas++;
+      }
+    }
+  });
+
+  const total = preguntas.length;
+  const porcentaje = (correctas / total) * 100;
+  let mensaje = "";
+
+  if (porcentaje >= 75) {
+    mensaje = `🎯 ¡Aprobado! Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  } else {
+    mensaje = `❌ No aprobado. Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  }
+
+  alert(mensaje);
+}
+  </script>
+
+  <!-- Script del botón volver -->
+  <script src="../../js/backButton.js"></script>
+</body>
+</html>

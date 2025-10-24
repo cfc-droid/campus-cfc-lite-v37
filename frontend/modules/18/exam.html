@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen — Módulo 18 — La Mentalidad del Mentor Trader</title>
+  <link rel="stylesheet" href="/frontend/css/premium.css">
+  <link rel="stylesheet" href="/frontend/css/exam-extra.css">
+  <script src="/frontend/js/motivation.js" defer></script>
+</head>
+
+<body>
+  <main class="contenido">
+    <h1>Examen — Módulo 18: La Mentalidad del Mentor Trader</h1>
+    <p><em>Reflexioná antes de responder. Este examen evalúa tu comprensión sobre la transición del dominio individual a la enseñanza consciente, la empatía y la madurez emocional del mentor trader.</em></p>
+
+    <form id="exam18">
+
+      <!-- Pregunta 1 -->
+      <fieldset>
+        <legend>1) Según el Capítulo 1, ¿cuál es la principal característica que define la transición del trader individual al mentor consciente?</legend>
+        <!-- Correcta: C -->
+        <label><input name="q1" type="radio" value="A"> A) La habilidad técnica superior en la lectura del mercado.</label><br>
+        <label><input name="q1" type="radio" value="B"> B) La capacidad de transmitir estrategias rentables de forma directa.</label><br>
+        <label><input name="q1" type="radio" value="C"> C) La madurez emocional para guiar sin depender del resultado ni del reconocimiento.</label><br>
+        <label><input name="q1" type="radio" value="D"> D) La búsqueda de formar un grupo de seguidores fieles a su estilo operativo.</label>
+      </fieldset>
+
+      <!-- Pregunta 2 -->
+      <fieldset>
+        <legend>2) En el Capítulo 2, “El Arte de Guiar sin Imponer”, ¿qué actitud representa mejor al mentor trader consciente?</legend>
+        <!-- Correcta: B -->
+        <label><input name="q2" type="radio" value="A"> A) Dar instrucciones precisas para evitar errores del aprendiz.</label><br>
+        <label><input name="q2" type="radio" value="B"> B) Formular preguntas reflexivas que despierten introspección y autonomía.</label><br>
+        <label><input name="q2" type="radio" value="C"> C) Corregir inmediatamente cualquier fallo para acelerar el aprendizaje.</label><br>
+        <label><input name="q2" type="radio" value="D"> D) Priorizar los resultados financieros del aprendiz sobre su equilibrio emocional.</label>
+      </fieldset>
+
+      <!-- Pregunta 3 -->
+      <fieldset>
+        <legend>3) De acuerdo con el Capítulo 3, “La Construcción del Legado Educativo”, ¿cuál es la esencia del legado del mentor trader?</legend>
+        <!-- Correcta: D -->
+        <label><input name="q3" type="radio" value="A"> A) Crear una marca reconocida dentro del mundo del trading.</label><br>
+        <label><input name="q3" type="radio" value="B"> B) Mantener contacto permanente con todos los alumnos formados.</label><br>
+        <label><input name="q3" type="radio" value="C"> C) Elaborar materiales técnicos que otros repitan sin modificar.</label><br>
+        <label><input name="q3" type="radio" value="D"> D) Transmitir valores, hábitos y mentalidad que generen independencia y madurez emocional.</label>
+      </fieldset>
+
+      <!-- Pregunta 4 -->
+      <fieldset>
+        <legend>4) Según el Capítulo 4, “El Maestro que Permanece en Silencio”, ¿qué comunica el mentor cuando elige no intervenir ante el error del aprendiz?</legend>
+        <!-- Correcta: A -->
+        <label><input name="q4" type="radio" value="A"> A) Confianza en la capacidad del otro para descubrir por sí mismo el aprendizaje oculto.</label><br>
+        <label><input name="q4" type="radio" value="B"> B) Falta de interés en los resultados obtenidos por el aprendiz.</label><br>
+        <label><input name="q4" type="radio" value="C"> C) Desacuerdo con la metodología aplicada durante la sesión.</label><br>
+        <label><input name="q4" type="radio" value="D"> D) Deseo de mantener distancia emocional para conservar autoridad.</label>
+      </fieldset>
+
+      <!-- 🔽 Botón funcional -->
+      <button type="button" onclick="enviarExamen()">Enviar respuestas</button>
+    </form>
+  </main>
+
+  <footer class="firma-cfc">
+    <p>© Campus CFC Trading LITE V37 — Cristian F. Choqui</p>
+  </footer>
+
+  <script>
+function enviarExamen() {
+  const preguntas = document.querySelectorAll('fieldset');
+  let correctas = 0;
+
+  preguntas.forEach((pregunta) => {
+    const seleccionada = pregunta.querySelector('input[type="radio"]:checked');
+    if (seleccionada) {
+      const comentario = pregunta.innerHTML.match(/<!-- Correcta:\s*([A-D]) -->/);
+      if (comentario && seleccionada.value === comentario[1]) {
+        correctas++;
+      }
+    }
+  });
+
+  const total = preguntas.length;
+  const porcentaje = (correctas / total) * 100;
+  let mensaje = "";
+
+  if (porcentaje >= 75) {
+    mensaje = `🎯 ¡Aprobado! Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  } else {
+    mensaje = `❌ No aprobado. Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  }
+
+  alert(mensaje);
+}
+  </script>
+
+  <!-- Script del botón volver -->
+  <script src="../../js/backButton.js"></script>
+</body>
+</html>

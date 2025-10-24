@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Examen — Módulo 15 — Arquitectura del Trading Mental Automático</title>
+  <link rel="stylesheet" href="/frontend/css/premium.css">
+  <link rel="stylesheet" href="/frontend/css/exam-extra.css">
+  <script src="/frontend/js/motivation.js" defer></script>
+</head>
+
+<body>
+  <main class="contenido">
+    <h1>Examen — Módulo 15: Arquitectura del Trading Mental Automático</h1>
+    <p><em>Reflexioná antes de responder. Este examen evalúa tu comprensión sobre la construcción interna de la mente automática, su coherencia emocional y la ejecución subconsciente del sistema operativo del trader.</em></p>
+
+    <form id="exam15">
+
+      <!-- Pregunta 1 -->
+      <fieldset>
+        <legend>1) Según el Capítulo 1, ¿cuál es el propósito fundamental de construir la “arquitectura mental” del trader?</legend>
+        <!-- Correcta: C -->
+        <label><input name="q1" type="radio" value="A"> A) Crear un sistema complejo de indicadores técnicos para evitar errores operativos.</label><br>
+        <label><input name="q1" type="radio" value="B"> B) Lograr eliminar completamente las emociones del proceso de trading.</label><br>
+        <label><input name="q1" type="radio" value="C"> C) Diseñar una estructura interna que mantenga la coherencia emocional y la disciplina incluso bajo presión.</label><br>
+        <label><input name="q1" type="radio" value="D"> D) Memorizar rutinas para automatizar órdenes sin razonamiento consciente.</label>
+      </fieldset>
+
+      <!-- Pregunta 2 -->
+      <fieldset>
+        <legend>2) En el Capítulo 2, la “ejecución sin pensar” se logra cuando...</legend>
+        <!-- Correcta: A -->
+        <label><input name="q2" type="radio" value="A"> A) La mente subconsciente ejecuta rutinas precisas ya instaladas, sin interferencia emocional ni deliberación.</label><br>
+        <label><input name="q2" type="radio" value="B"> B) El trader ignora completamente su sistema para seguir la intuición del momento.</label><br>
+        <label><input name="q2" type="radio" value="C"> C) Se combina intuición con improvisación constante para mantener la flexibilidad.</label><br>
+        <label><input name="q2" type="radio" value="D"> D) Se alcanza un estado emocional intenso antes de cada operación.</label>
+      </fieldset>
+
+      <!-- Pregunta 3 -->
+      <fieldset>
+        <legend>3) De acuerdo con el Capítulo 3, ¿qué significa “reprogramar el algoritmo emocional” del trader?</legend>
+        <!-- Correcta: D -->
+        <label><input name="q3" type="radio" value="A"> A) Sustituir todas las emociones negativas por pensamientos optimistas antes de operar.</label><br>
+        <label><input name="q3" type="radio" value="B"> B) Evitar sentir cualquier tipo de emoción durante la sesión.</label><br>
+        <label><input name="q3" type="radio" value="C"> C) Identificar las emociones pero no registrarlas, para no perder concentración.</label><br>
+        <label><input name="q3" type="radio" value="D"> D) Detectar, reinterpretar y redirigir las emociones para que funcionen como señales funcionales dentro del plan operativo.</label>
+      </fieldset>
+
+      <!-- Pregunta 4 -->
+      <fieldset>
+        <legend>4) Según el Capítulo 4, la “integración total” se manifiesta cuando...</legend>
+        <!-- Correcta: B -->
+        <label><input name="q4" type="radio" value="A"> A) La mente racional controla completamente al sistema emocional, eliminando la intuición.</label><br>
+        <label><input name="q4" type="radio" value="B"> B) Pensamiento, emoción y acción operan en coherencia, permitiendo ejecutar con neutralidad y fluidez.</label><br>
+        <label><input name="q4" type="radio" value="C"> C) Se logra suprimir cualquier respuesta corporal para mantener el foco absoluto.</label><br>
+        <label><input name="q4" type="radio" value="D"> D) El trader alcanza una motivación intensa antes de cada entrada.</label>
+      </fieldset>
+
+      <!-- 🔽 Botón funcional -->
+      <button type="button" onclick="enviarExamen()">Enviar respuestas</button>
+    </form>
+  </main>
+
+  <footer class="firma-cfc">
+    <p>© Campus CFC Trading LITE V37 — Cristian F. Choqui</p>
+  </footer>
+
+  <script>
+function enviarExamen() {
+  const preguntas = document.querySelectorAll('fieldset');
+  let correctas = 0;
+
+  preguntas.forEach((pregunta) => {
+    const seleccionada = pregunta.querySelector('input[type="radio"]:checked');
+    if (seleccionada) {
+      const comentario = pregunta.innerHTML.match(/<!-- Correcta:\s*([A-D]) -->/);
+      if (comentario && seleccionada.value === comentario[1]) {
+        correctas++;
+      }
+    }
+  });
+
+  const total = preguntas.length;
+  const porcentaje = (correctas / total) * 100;
+  let mensaje = "";
+
+  if (porcentaje >= 75) {
+    mensaje = `🎯 ¡Aprobado! Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  } else {
+    mensaje = `❌ No aprobado. Obtuviste ${correctas}/${total} (${porcentaje.toFixed(0)}%).`;
+  }
+
+  alert(mensaje);
+}
+  </script>
+
+  <!-- Script del botón volver -->
+  <script src="../../js/backButton.js"></script>
+</body>
+</html>
