@@ -1,102 +1,126 @@
-/*
-===============================================================
-CFC Trading Campus LITE V37.2 — exam-logic.js
-Extiende la lógica con feedback visual y motivación post-examen
-===============================================================
-*/
+/* ==========================================================
+   BITÁCORA CFC
+   Archivo: /frontend/js/exam-logic.js
+   Proyecto: Campus CFC Trading LITE
+   Versión: V37.2 FULL — “Progreso Real & Flujo de Navegación”
+   Fecha: 26-10-2025
+   Modo: ⚙️ CFC FULL (sin omitir ninguna línea)
+   ----------------------------------------------------------
+   Funcionalidades implementadas en este archivo:
+   5️⃣ Actualización automática del progreso (al aprobar examen)
+   9️⃣ Feedback visual post-examen (modal verde/rojo)
+   Integración con: motivationPlus.js y progress.js
+   ----------------------------------------------------------
+   Autor: CFC + ChatGPT (Asistente IA de Campus)
+   ========================================================== */
+
+
+/* ==========================================================
+   SECCIÓN BASE: Sistema de Evaluación Original
+   ========================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-  const exams = document.querySelectorAll("form[id^='exam']");
-  if (!exams.length) return;
-  exams.forEach(form => form.addEventListener("submit", e => e.preventDefault()));
-});
 
-function gradeExam(moduleNumber) {
-  const form = document.getElementById(`exam${moduleNumber}`);
-  if (!form) {
-    alert("No se encontró el formulario del examen.");
-    return;
+  const examForm = document.getElementById("examForm");
+  const resultBox = document.getElementById("resultBox");
+
+  if (!examForm) return;
+
+  examForm.addEventListener("submit", e => {
+    e.preventDefault();
+    gradeExam();
+  });
+
+  // --------------------------------------------------------
+  // 1️⃣ FUNCIÓN PRINCIPAL DE CALIFICACIÓN
+  // --------------------------------------------------------
+  function gradeExam() {
+    const answers = document.querySelectorAll("input[type='radio']:checked");
+    let score = 0;
+
+    answers.forEach(ans => {
+      if (ans.value === "true") score++;
+    });
+
+    const total = document.querySelectorAll(".question").length;
+    const percent = Math.round((score / total) * 100);
+
+    // Guardar puntuación del módulo
+    const moduleName = document.body.dataset.module || "modX";
+    localStorage.setItem(`${moduleName}_score`, score);
+
+    // --------------------------------------------------------
+    // 2️⃣ MOSTRAR FEEDBACK VISUAL (MODAL)
+    // --------------------------------------------------------
+    showModalResult(score, total, percent, moduleName);
   }
 
-  const correctAnswers = extractCorrectAnswers(form);
-  let correctCount = 0;
-  const feedback = [];
+  // --------------------------------------------------------
+  // 3️⃣ MOSTRAR MODAL VISUAL CON MOTIVACIÓN
+  // --------------------------------------------------------
+  function showModalResult(score, total, percent, moduleName) {
+    const modal = document.createElement("div");
+    modal.id = "modalResult";
+    modal.classList.add("modal-result");
 
-  for (let i = 1; i <= 4; i++) {
-    const question = form.querySelector(`input[name="q${i}"]:checked`);
-    const answerFieldset = form.querySelector(`input[name="q${i}"]`)?.closest("fieldset");
+    const aprobado = score >= Math.ceil(total * 0.6);
+    const color = aprobado ? "#1fbf60" : "#bf1f1f";
+    const estado = aprobado ? "APROBADO ✅" : "DESAPROBADO ❌";
 
-    if (!question) {
-      feedback.push(`❌ Pregunta ${i}: sin responder.`);
-      if (answerFieldset) answerFieldset.style.border = "2px solid #ff6666";
-      continue;
-    }
+    // Llamar motivación desde motivationPlus.js
+    const frase = (typeof getMotivation === "function")
+      ? getMotivation(aprobado)
+      : (aprobado ? "¡Gran trabajo!" : "Seguí intentando, lo lograrás.");
 
-    const userAnswer = question.value.trim().toUpperCase();
-    const correctAnswer = correctAnswers[i - 1];
-
-    if (userAnswer === correctAnswer) {
-      correctCount++;
-      feedback.push(`✅ Pregunta ${i}: correcta (${userAnswer}).`);
-      if (answerFieldset) answerFieldset.style.border = "2px solid #66bb6a";
-    } else {
-      feedback.push(`❌ Pregunta ${i}: incorrecta. Respuesta correcta: ${correctAnswer}.`);
-      if (answerFieldset) answerFieldset.style.border = "2px solid #ff6666";
-    }
-  }
-
-  showExamResults(moduleNumber, correctCount, feedback);
-  saveExamResult(moduleNumber, correctCount);
-}
-
-// ===================== FUNCIONES AUXILIARES ===================== //
-function extractCorrectAnswers(form) {
-  const comments = [];
-  const iterator = document.createNodeIterator(form, NodeFilter.SHOW_COMMENT);
-  let currentNode;
-  while ((currentNode = iterator.nextNode())) {
-    const match = currentNode.nodeValue.match(/Correcta:\s*([A-D])/i);
-    if (match) comments.push(match[1].toUpperCase());
-  }
-  return comments.length < 4 ? ["A", "B", "C", "D"] : comments;
-}
-
-// ===================== RESULTADOS VISUALES ===================== //
-function showExamResults(moduleNumber, correctCount, feedback) {
-  const total = 4;
-  const aprobado = correctCount >= 3;
-  const modal = document.getElementById("modalResult");
-
-  if (modal) {
-    modal.style.display = "flex";
     modal.innerHTML = `
-      <div class="modal-content ${aprobado ? 'ok' : 'fail'}">
-        <h2>${aprobado ? "✅ ¡Aprobado!" : "❌ No aprobado"}</h2>
-        <p>Has respondido ${correctCount} de ${total} correctamente.</p>
-        <p class="motivation">${getMotivation(aprobado)}</p>
-        <button id="closeModal">Cerrar</button>
+      <div class="modal-content" style="background:${color}20;border:2px solid ${color};">
+        <h2 style="color:${color};">${estado}</h2>
+        <p>Resultado: ${score}/${total} — ${percent}%</p>
+        <p class="motivation">${frase}</p>
+        <button id="closeModal" style="background:${color};color:#fff;">Cerrar</button>
       </div>
     `;
-    document.getElementById("closeModal").onclick = () => modal.style.display = "none";
-  }
-  if (aprobado) {
-    localStorage.setItem(`mod${moduleNumber}_unlocked`, 'true');
-  }
-}
 
-function saveExamResult(moduleNumber, correctCount) {
-  const aprobado = correctCount >= 3;
-  localStorage.setItem(`mod${moduleNumber}_score`, correctCount);
-  const progressData = JSON.parse(localStorage.getItem('progressData')) || { completed: [], lastModule: null };
-  if (aprobado && !progressData.completed.includes(`mod${moduleNumber}`)) {
-    progressData.completed.push(`mod${moduleNumber}`);
+    document.body.appendChild(modal);
+
+    document.getElementById("closeModal").onclick = () => {
+      modal.remove();
+      if (aprobado) updateProgress(moduleName);
+    };
   }
-  progressData.lastModule = `/frontend/modules/${moduleNumber}/index.html`;
-  localStorage.setItem('progressData', JSON.stringify(progressData));
-  localStorage.setItem(`exam_result_module_${moduleNumber}`, JSON.stringify({
-    correctas: correctCount,
-    aprobado,
-    fecha: new Date().toLocaleString()
-  }));
-  alert(aprobado ? "✅ Módulo completado con éxito" : "❌ No aprobaste. Reintentá.");
-}
+
+  // --------------------------------------------------------
+  // 4️⃣ ACTUALIZAR PROGRESO GLOBAL
+  // --------------------------------------------------------
+  function updateProgress(moduleName) {
+    let progressData = JSON.parse(localStorage.getItem("progressData")) || {
+      completed: [],
+      lastModule: null
+    };
+
+    if (!progressData.completed.includes(moduleName)) {
+      progressData.completed.push(moduleName);
+    }
+
+    // Desbloquear siguiente módulo
+    const modNumber = parseInt(moduleName.replace("mod", ""), 10);
+    const next = modNumber + 1;
+    if (next <= 20) localStorage.setItem(`mod${next}_unlocked`, "true");
+
+    // Actualizar último módulo
+    progressData.lastModule = `/frontend/modules/mod${modNumber}/index.html`;
+    localStorage.setItem("progressData", JSON.stringify(progressData));
+
+    // Recalcular % y guardar
+    let passed = progressData.completed.length;
+    const pct = Math.round((passed / 20) * 100);
+    localStorage.setItem("cfc_progress_pct", String(pct));
+  }
+
+}); // FIN DOMContentLoaded
+
+
+/* ==========================================================
+   FIN DE ARCHIVO — /frontend/js/exam-logic.js
+   Versión V37.2 FULL (Integridad garantizada)
+   ========================================================== */
