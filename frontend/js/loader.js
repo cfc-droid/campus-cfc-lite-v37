@@ -2,19 +2,19 @@
    ✅ BITÁCORA CFC
    Funcionalidad: Loader Premium CFC
    Subpaso: 1.3 — HTML + JS + CSS + Preload
-   Tipo: Extensión parcial
-   Fecha: 25-10-2025
+   Tipo: Extensión parcial (Fix Visual Premium)
+   Fecha: 26-10-2025
    ========================================== */
 
 // ===================================
-// LOADER CFC — DESAPARICIÓN AUTOMÁTICA
+// LOADER CFC — DESAPARICIÓN AUTOMÁTICA (FIXED)
 // ===================================
 
 document.addEventListener("DOMContentLoaded", () => {
   const loader = document.getElementById("loader");
   const hero = document.getElementById("inicio");
 
-  // Ocultar loader después de 3 segundos
+  // Aumentamos el tiempo de espera a 4 segundos para mejor visibilidad
   setTimeout(() => {
     if (loader) {
       loader.style.transition = "opacity 0.8s ease-in-out";
@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (hero) hero.classList.add("fade-in-hero");
       }, 800);
     }
-  }, 3000);
+  }, 4000); // antes 3000 → ahora 4000 ms para mostrar frase correctamente
 });
 
-// ✅ CFC_FUNC_15_SUBPASO_1.3 — Frases + botón + fadeOut extra (25-10-2025)
+// ✅ CFC_FUNC_15_SUBPASO_1.3 — Frases + botón + fadeOut extra (26-10-2025)
 const frases = [
   "El control emocional es tu mejor estrategia 🎯",
   "Respirá, analizá y ejecutá 🧠",
@@ -55,7 +55,11 @@ const frases = [
 
 document.addEventListener("DOMContentLoaded", () => {
   const quote = document.getElementById("quote");
-  if (quote) quote.textContent = frases[Math.floor(Math.random() * frases.length)];
+  if (quote) {
+    const random = Math.floor(Math.random() * frases.length);
+    quote.textContent = frases[random];
+    console.log("🧠 Frase motivacional cargada:", frases[random]);
+  }
 
   const enterBtn = document.getElementById("enterBtn");
   if (enterBtn) {
@@ -66,3 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// ==========================================
+// FIN BITÁCORA CFC — Loader Premium FIX
+// ==========================================
