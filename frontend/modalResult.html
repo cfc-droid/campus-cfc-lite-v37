@@ -1,0 +1,45 @@
+<!-- ==========================================================
+     Archivo: /frontend/modalResult.html
+     Propósito: Plantilla visual reutilizable del modal post-examen
+     Versión: V37.2 FULL — Compatible con CFC-FULL-LOCK v3.5
+     ========================================================== -->
+<div id="modalResult" class="modal-result">
+  <div class="modal-content">
+    <h2 id="modalState"></h2>
+    <p id="modalScore"></p>
+    <p id="modalMotivation"></p>
+    <button id="closeModalBtn">Cerrar</button>
+  </div>
+</div>
+
+<style>
+  #modalResult {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.75);
+    z-index: 9999;
+  }
+  #modalResult .modal-content {
+    background: #0a0a0a;
+    border: 2px solid #d4af37;
+    color: #eaeaea;
+    padding: 25px;
+    border-radius: 14px;
+    max-width: 420px;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+  }
+  #modalResult button {
+    background: #d4af37;
+    border: none;
+    border-radius: 8px;
+    color: #0a0a0a;
+    padding: 10px 24px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  #modalResult button:hover { filter: brightness(1.2); }
+</style>
