@@ -135,3 +135,43 @@ h1, h2, h3 {
   0%, 100% { transform: scale(1); opacity: 0.9; }
   50% { transform: scale(1.05); opacity: 1; }
 }
+
+/* ==========================================
+   ✅ BITÁCORA CFC — Header y Footer Global Premium (25-10-2025)
+   ========================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: #0a0a0a;
+  border-bottom: 1px solid #d4af37;
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+}
+
+.navbar .menu a {
+  color: #eaeaea;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar .menu a:hover {
+  color: #d4af37;
+}
+
+.dynamic-footer {
+  background: #0a0a0a;
+  color: #eaeaea;
+  border-top: 1px solid #d4af37;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+  margin-top: 40px;
+  letter-spacing: 0.4px;
+}
+
+/* ========================================== */
